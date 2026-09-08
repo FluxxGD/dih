@@ -169,3 +169,39 @@ export interface GameSettings {
   theme: ArenaTheme;
   screenShakeEnabled: boolean;
 }
+
+export interface DemonPlayer {
+  id: number;
+  name: string;
+  banned: boolean;
+}
+
+export interface DemonListItem {
+  id: number;
+  position: number;
+  name: string;
+  requirement: number;
+  video: string | null;
+  thumbnail?: string | null;
+  publisher: DemonPlayer;
+  verifier: DemonPlayer;
+  level_id: number;
+}
+
+export interface DemonRecord {
+  id: number;
+  progress: number;
+  video: string | null;
+  status: string;
+  player: DemonPlayer;
+  nationality?: {
+    country_code: string;
+    nation: string;
+  } | null;
+}
+
+export interface DemonDetails extends DemonListItem {
+  creators: DemonPlayer[];
+  records?: DemonRecord[];
+}
+

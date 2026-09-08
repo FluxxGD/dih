@@ -12,9 +12,10 @@ import { PythonCodeModal } from './components/PythonCodeModal';
 import { SettingsModal } from './components/SettingsModal';
 import { CustomizerModal } from './components/CustomizerModal';
 import { AchievementsModal } from './components/AchievementsModal';
+import { DemonListModal } from './components/DemonListModal';
 import { sound } from './services/sound';
 import { INITIAL_ACHIEVEMENTS, INITIAL_MISSIONS, SKINS } from './data/missionsAndAchievements';
-import { Keyboard, MousePointer, Code2, Palette, Trophy, Sparkles } from 'lucide-react';
+import { Keyboard, MousePointer, Code2, Palette, Trophy, Sparkles, Flame } from 'lucide-react';
 
 export default function App() {
   const [gameStatus, setGameStatus] = useState<GameStatus>('idle');
@@ -22,6 +23,7 @@ export default function App() {
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
   const [customizerModalOpen, setCustomizerModalOpen] = useState(false);
   const [achievementsModalOpen, setAchievementsModalOpen] = useState(false);
+  const [demonListModalOpen, setDemonListModalOpen] = useState(false);
 
   // Active Achievements and Missions
   const [achievements, setAchievements] = useState<Achievement[]>(INITIAL_ACHIEVEMENTS);
@@ -168,6 +170,7 @@ export default function App() {
         onOpenPythonCode={() => setPythonModalOpen(true)}
         onOpenCustomizer={() => setCustomizerModalOpen(true)}
         onOpenAchievements={() => setAchievementsModalOpen(true)}
+        onOpenDemonList={() => setDemonListModalOpen(true)}
         onRestart={handleRestart}
       />
 
@@ -189,6 +192,7 @@ export default function App() {
             // Triggered from canvas/controls
           }}
           onAchievementUnlock={handleAchievementUnlock}
+          onOpenDemonList={() => setDemonListModalOpen(true)}
         />
 
         {/* Game Over Modal */}
@@ -247,6 +251,16 @@ export default function App() {
             <span className="font-medium text-[11px]">Trophies</span>
           </button>
 
+          {/* Geometry Dash Demon List Shortcut */}
+          <button
+            id="footer-gd-demonlist-btn"
+            onClick={() => setDemonListModalOpen(true)}
+            className="flex items-center gap-1 text-neutral-300 hover:text-red-400 transition-colors"
+          >
+            <Flame size={13} className="text-red-400" />
+            <span className="font-medium text-[11px]">GD Demon List</span>
+          </button>
+
           {/* Python Bug Fix Inspector */}
           <button
             onClick={() => setPythonModalOpen(true)}
@@ -282,6 +296,12 @@ export default function App() {
         achievements={achievements}
         missions={missions}
         stats={stats}
+      />
+
+      {/* Geometry Dash Demon List Modal (Pointercrate API) */}
+      <DemonListModal
+        isOpen={demonListModalOpen}
+        onClose={() => setDemonListModalOpen(false)}
       />
 
       {/* Python Source Code & Bug Fix Inspector */}

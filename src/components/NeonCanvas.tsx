@@ -16,6 +16,7 @@ import {
 } from '../types';
 import { sound } from '../services/sound';
 import { SKINS, ARENA_THEMES } from '../data/missionsAndAchievements';
+import { Flame } from 'lucide-react';
 
 interface NeonCanvasProps {
   gameStatus: GameStatus;
@@ -27,6 +28,7 @@ interface NeonCanvasProps {
   onTriggerEMP: () => void;
   onTriggerDash: () => void;
   onAchievementUnlock: (id: string) => void;
+  onOpenDemonList?: () => void;
 }
 
 const CANVAS_WIDTH = 800;
@@ -42,6 +44,7 @@ export const NeonCanvas: React.FC<NeonCanvasProps> = ({
   onTriggerEMP,
   onTriggerDash,
   onAchievementUnlock,
+  onOpenDemonList,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -1544,16 +1547,35 @@ export const NeonCanvas: React.FC<NeonCanvasProps> = ({
             Dodge falling hazards, shoot lasers, unleash EMP bombs, battle the Dreadnought Boss, and equip custom styles like the Trans Pride Cruiser!
           </p>
 
-          <button
-            id="start-game-btn"
-            onClick={() => {
-              setGameStatus('playing');
-              sound.playClick();
-            }}
-            className="px-8 py-3.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-arcade font-bold text-sm tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(34,197,94,0.45)] hover:shadow-[0_0_30px_rgba(34,197,94,0.7)] hover:scale-105 active:scale-95"
-          >
-            Launch Mission [SPACE]
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              id="start-game-btn"
+              onClick={() => {
+                setGameStatus('playing');
+                sound.playClick();
+              }}
+              className="px-8 py-3.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-arcade font-bold text-sm tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(34,197,94,0.45)] hover:shadow-[0_0_30px_rgba(34,197,94,0.7)] hover:scale-105 active:scale-95"
+            >
+              Launch Mission [SPACE]
+            </button>
+
+            {/* Geometry Dash Demon List Button (Pointercrate API) */}
+            <button
+              id="main-menu-gd-demonlist-btn"
+              onClick={() => {
+                sound.playClick();
+                onOpenDemonList?.();
+              }}
+              title="View the Geometry Dash Demon List (Main & Extended List)"
+              className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-red-600/30 via-orange-600/30 to-amber-600/30 hover:from-red-600/50 hover:via-orange-600/50 hover:to-amber-600/50 border border-red-500/60 hover:border-red-400 text-red-200 hover:text-white font-arcade font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)] flex items-center gap-2 hover:scale-105 active:scale-95"
+            >
+              <Flame size={16} className="text-orange-400 animate-pulse" />
+              <span>GD Demon List</span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/40 text-white font-mono border border-red-500/50">
+                Pointercrate
+              </span>
+            </button>
+          </div>
 
           <div className="mt-8 grid grid-cols-4 gap-3 max-w-lg w-full text-xs text-neutral-400">
             <div className="p-2.5 rounded-lg bg-neutral-900/60 border border-neutral-800 flex flex-col items-center">

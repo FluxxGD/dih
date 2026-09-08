@@ -25,6 +25,7 @@ interface HUDProps {
   onOpenPythonCode: () => void;
   onOpenCustomizer: () => void;
   onOpenAchievements: () => void;
+  onOpenDemonList: () => void;
   onRestart: () => void;
 }
 
@@ -38,6 +39,7 @@ export const HUD: React.FC<HUDProps> = ({
   onOpenPythonCode,
   onOpenCustomizer,
   onOpenAchievements,
+  onOpenDemonList,
   onRestart,
 }) => {
   const toggleSound = () => {
@@ -225,6 +227,16 @@ export const HUD: React.FC<HUDProps> = ({
             className="p-2 rounded-lg bg-neutral-800/80 hover:bg-neutral-700 text-yellow-400 hover:text-yellow-300 transition-colors"
           >
             <Trophy size={15} />
+          </button>
+
+          {/* Geometry Dash Demonlist Shortcut */}
+          <button
+            id="hud-demonlist-btn"
+            onClick={onOpenDemonList}
+            title="Geometry Dash Demon List (Pointercrate API)"
+            className="p-2 rounded-lg bg-neutral-800/80 hover:bg-neutral-700 text-red-400 hover:text-red-300 transition-colors"
+          >
+            <Flame size={15} />
           </button>
 
           {/* Settings */}
