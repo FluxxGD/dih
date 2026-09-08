@@ -1,0 +1,6 @@
+{
+  "name": "Neon Dodge",
+  "description": "A polished neon arcade dodge game with fluid controls, dynamic obstacles, particle effects, synth audio, and high scores.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
